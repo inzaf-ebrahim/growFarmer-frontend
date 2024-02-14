@@ -21,28 +21,37 @@ function Signup() {
       setError(
         "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit"
       );
+      return false
     } else if (password !== confirmPassword) {
       setError("Passwords do not match");
+      return false
     } else if (!role) {
       setError("Please select your role");
+      return false
     }
+      return true
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    Validation();
-
-    try {
-      const response = await axios.post("http://localhost:4000/signup", {
-        name,
-        email,
-        password,
-        role,
-      });
-      console.log("Signup successful:", response);
-    } catch (error) {
-      console.error("Signup error:", error.message);
+    
+    if(Validation()    ){
+      try {
+        const response = await axios.post("http://localhost:4000/signup", {
+          name,
+          email,
+          password,
+          role,
+        });
+        console.log("Signup successful:", response);
+      } catch (error) {
+        console.error("Signup error:", error.message);
+      }
+  
+        sethome(true);
+    }else{
+      console.log('validation error');
     }
-    sethome(true);
+    
     // console.log("Signup form submitted:", { name, email, password, role });
   };
 
@@ -117,7 +126,7 @@ function Signup() {
               {/* <option value="">Admin</option> */}
               <option value="user">User</option>
               <option value="farmer">Farmer</option>
-              <option value="landowner">LandOwner</option>
+              {/* <option value="landowner">LandOwner</option> */}
             </select>
           </div>
           <div className="flex justify-center">
