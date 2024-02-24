@@ -11,7 +11,7 @@ function Signup() {
   const [role, setrole] = useState("User");
   const [error, setError] = useState("");
   // const [home, sethome] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
@@ -43,13 +43,13 @@ function Signup() {
         });
         console.log("Signup successful:", response);
         console.log(response.data.token);
-      const jwtToken = response.data.token
-      localStorage.setItem('jwtToken',jwtToken)
+        const jwtToken = response.data.token;
+        localStorage.setItem("jwtToken", jwtToken);
       } catch (error) {
         console.error("Signup error:", error.message);
       }
       // sethome(true);
-navigate(`/${role}`,{replace:true})
+      navigate(`/${role}`, { replace: true });
     } else {
       console.log("validation error");
     }

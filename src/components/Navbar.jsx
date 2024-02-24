@@ -14,11 +14,11 @@ function Navbar() {
             <img className="ml-5 p-1  w-20 h-16" src={logo} alt="" /> 
           </div>
           <nav className="flex gap-5  items-center justify-center ">
-            <NavLink to='/'>HOME</NavLink>
-            <NavLink to='/farmerhome'>LANDS</NavLink>
-            <NavLink to='/jhv'>PRODUCTS</NavLink>
-            <NavLink to='/hv'>SELL</NavLink>
-            <NavLink to='/jh'>ACTIVITY</NavLink>
+            <NavLink to='/farmer'>HOME</NavLink>
+            <NavLink to='/'>LANDS</NavLink>
+            <NavLink to='/farmer/products'>PRODUCTS</NavLink>
+            <NavLink to='/farmer/sell'>SELL</NavLink>
+            <NavLink to='/'>ACTIVITY</NavLink>
           </nav>
         </div>
         <div className="flex items-center gap-5">

@@ -9,7 +9,7 @@ import Login from './Login'
 function LandingPage() {
   return (
     <div >
-    <div><Navbar/></div>
+    <Navbar/>
     <div className='w-screen h-[633px] bg-cover ' style={{backgroundImage:`url(${bg})`}}>
         <h1 className='text-white text-7xl pl-6 pt-56 font-serif '>organic fresh</h1>
         <h1 className='text-white text-7xl pl-6 pt-4 font-serif'>food</h1>

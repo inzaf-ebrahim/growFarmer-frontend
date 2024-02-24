@@ -9,16 +9,15 @@ import LandownerRouter from "./routes/LandownerRouter";
 // import CommonRouter from "./routes/CommonRouter";
 function App() {
   return (
-    <BrowserRouter >
-    <Routes>
-      <Route path="/*" element={<CommonRouter/>}></Route>
-      <Route path="/farmer/*" element={<FarmerRouter/>}></Route>
-      <Route path="/admin/*" element={<AdminRouter/>}></Route>
-      <Route path="/user/*" element={<UserRouter/>}></Route>
-      <Route path="/landowner/*" element={<LandownerRouter/>}></Route>
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<CommonRouter />}></Route>
+        <Route path="/farmer/*" element={<FarmerRouter />}></Route>
+        <Route path="/admin/*" element={<AdminRouter />}></Route>
+        <Route path="/user/*" element={<UserRouter />}></Route>
+        <Route path="/landowner/*" element={<LandownerRouter />}></Route>
+      </Routes>
     </BrowserRouter>
-
   );
 }
 
