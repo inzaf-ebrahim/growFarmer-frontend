@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosInstance from "../api/axios";
+import { Link } from "react-router-dom";
 
 function AddProducts() {
   const [image, setImage] = useState("");
@@ -25,15 +26,14 @@ function AddProducts() {
         },
       });
       console.log("file uploaded successfully", response);
-      setImage('')
-      setDescription('')
-      setName('')
-      setPrice('')
-      setQuantity('')
+      setImage("");
+      setDescription("");
+      setName("");
+      setPrice("");
+      setQuantity("");
     } catch (error) {
       console.log("error in addproduct post ", error);
     }
-    
   };
 
   return (
@@ -109,11 +109,8 @@ function AddProducts() {
         >
           Add Product
         </button>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-        >
-          see Product
+        <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+          <Link to='/farmer/products'>see Product</Link>
         </button>
       </form>
     </div>

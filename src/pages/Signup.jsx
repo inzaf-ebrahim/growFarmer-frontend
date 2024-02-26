@@ -45,11 +45,12 @@ function Signup() {
         console.log(response.data.token);
         const jwtToken = response.data.token;
         localStorage.setItem("jwtToken", jwtToken);
+        navigate(`/${role}`, { replace: true });
       } catch (error) {
         console.error("Signup error:", error.message);
+        setError(`${role} already exists,please login`)
       }
       // sethome(true);
-      navigate(`/${role}`, { replace: true });
     } else {
       console.log("validation error");
     }
@@ -132,7 +133,7 @@ function Signup() {
               </select>
             </div>
             <div className="flex justify-center">
-              <p className="text-red-500">{error}</p>
+              <p className="text-yellow-400 ">{error}</p>
             </div>
             <button
               type="submit"
