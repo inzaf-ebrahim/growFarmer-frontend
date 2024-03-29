@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import AddProducts from "../components/AddProducts";
+import AddProducts from "../components/Farmer/AddProducts";
 
 function FarmerSell() {
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosInstance from "../api/axios";
+import axiosInstance from "../../api/axios";
 import { Link } from "react-router-dom";
 
 function AddProducts() {
@@ -110,7 +110,7 @@ function AddProducts() {
           Add Product
         </button>
         <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-          <Link to='/farmer/products'>see Product</Link>
+          <Link to='/farmer/myproducts'>My Products</Link>
         </button>
       </form>
     </div>

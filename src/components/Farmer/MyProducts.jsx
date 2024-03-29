@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from "react";
-import axiosInstance from "../api/axios";
+import React, { useEffect, useState } from "react";
+import Navbar from "../Navbar";
+import axiosInstance from "../../api/axios";
+import { Link, useNavigate } from "react-router-dom";
 
-function ShowProducts() {
-  const [data, setdata] = useState([]);
+function MyProducts() {
+  const Navigate =useNavigate()
+  const [data, setData] = useState([]);
+const handleEdit=(id)=>{
+  Navigate(`/farmer/editproducts/${id}`)
+}
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get("/farmer/download");
-        setdata(response.data.productData);
-        console.log(response.data.productData);
+        const response = await axiosInstance.get('/farmer/myproducts');
+        setData(response.data.productData);
       } catch (error) {
-        console.log("Error in getting products: ", error);
+        console.error("Error fetching data:", error);
+        // Handle error here, e.g., set a state variable indicating the error
       }
     };
 
@@ -18,11 +25,11 @@ function ShowProducts() {
   }, []);
 
   return (
-    <>
-      
+    <div>
+      <Navbar />
+      <h1>My Products</h1>
       <div className="container mx-auto px-14 py-8">
         <h2 className="text-2xl font-semibold mb-4">All Products </h2>
-       
         <div className="flex flex-wrap gap-5 ">
           {data.map((singleData, index) => (
             <div key={index} className="flex flex-col border rounded-lg p-4">
@@ -39,13 +46,19 @@ function ShowProducts() {
                   <span className="text-sm font-semibold">₹{singleData.price}</span>
                 </div>
               </div>
-              <button className='text-white rounded-md bg-green-500 hover:bg-green-900 hover:scale-90 px-3 p-2 my-2 '>Buy</button>
+              <div className="flex gap-2 ">
+
+              <button className='text-white rounded-md bg-green-500 hover:bg-green-900 hover:scale-90 px-3 p-2 my-2 w-full' onClick={handleEdit(singleData._id)}>
+                Edit
+              </button>
+              <button className='text-white rounded-md bg-green-500 hover:bg-green-900 hover:scale-90 px-3 p-2 my-2 w-full '>Delete</button>
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export default ShowProducts;
+export default MyProducts;
