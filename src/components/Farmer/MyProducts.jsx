@@ -4,16 +4,26 @@ import axiosInstance from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 
 function MyProducts() {
-  const Navigate =useNavigate()
+  const Navigate = useNavigate();
   const [data, setData] = useState([]);
-const handleEdit=(id)=>{
-  Navigate(`/farmer/editproducts/${id}`)
-}
+  const handleEdit = (id) => {
+    Navigate(`/farmer/editproducts/${id}`);
+  };
+  const handleDelete =async (id)=>{
+    try {
+      await axiosInstance.delete(`/farmer/deleteProduct/${id}`);
+      // After successful deletion, remove the deleted product from the state
+      setData(data.filter(product => product._id !== id));
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      // Handle error here, e.g., display an error message to the user
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get('/farmer/myproducts');
+        const response = await axiosInstance.get("/farmer/myproducts");
         setData(response.data.productData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -42,16 +52,28 @@ const handleEdit=(id)=>{
                 <h3 className="font-semibold mb-1">{singleData.name}</h3>
                 <p className="line-clamp-2">{singleData.description}</p>
                 <div className="flex items-center justify-between mt-2">
-                  <span className="text-sm text-gray-500">{singleData.quantity}</span>
-                  <span className="text-sm font-semibold">₹{singleData.price}</span>
+                  <span className="text-sm text-gray-500">
+                    {singleData.quantity}
+                  </span>
+                  <span className="text-sm font-semibold">
+                    ₹{singleData.price}
+                  </span>
                 </div>
               </div>
               <div className="flex gap-2 ">
+                <button
+                  className="text-white rounded-md bg-green-500 hover:bg-green-900 hover:scale-90 px-3 p-2 my-2 w-full"
+                  onClick={() => handleEdit(singleData._id)}
+                >
+                  Edit
+                </button>
 
-              <button className='text-white rounded-md bg-green-500 hover:bg-green-900 hover:scale-90 px-3 p-2 my-2 w-full' onClick={handleEdit(singleData._id)}>
-                Edit
-              </button>
-              <button className='text-white rounded-md bg-green-500 hover:bg-green-900 hover:scale-90 px-3 p-2 my-2 w-full '>Delete</button>
+                <button className="text-white rounded-md bg-green-500 hover:bg-green-900 hover:scale-90 px-3 p-2 my-2 w-full "
+                  onClick={() => handleDelete(singleData._id)}
+                  >
+                  Delete
+
+                </button>
               </div>
             </div>
           ))}

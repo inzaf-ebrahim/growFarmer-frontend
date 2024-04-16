@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import bg from "../assets/images/bg-2.jpeg";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axios";
+import axios from "axios";
 
 function Signup() {
   const [name, setname] = useState("insaf");
@@ -35,7 +36,7 @@ function Signup() {
 
     if (Validation()) {
       try {
-        const response = await axiosInstance.post("/signup", {
+        const response = await axios.post("http://localhost:4000/signup", {
           name,
           email,
           password,
@@ -44,7 +45,7 @@ function Signup() {
         console.log("Signup successful:", response);
         console.log(response.data.token);
         const jwtToken = response.data.token;
-        localStorage.setItem("jwtToken", jwtToken);
+        localStorage.setItem('jwtToken', jwtToken);
         navigate(`/${role}`, { replace: true });
       } catch (error) {
         console.error("Signup error:", error.message);
@@ -54,7 +55,6 @@ function Signup() {
     } else {
       console.log("validation error");
     }
-
     // console.log("Signup form submitted:", { name, email, password, role });
   };
 

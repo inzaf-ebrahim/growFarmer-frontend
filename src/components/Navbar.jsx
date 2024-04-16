@@ -11,7 +11,9 @@ function Navbar() {
   };
   const Navigate = useNavigate()
   const logout = ()=>{
-    localStorage.removeItem('jwtToken');
+    const loggedUser = localStorage.getItem(`jwtToken`)
+    localStorage.removeItem("jwtToken");
+    console.log('logged out');
 Navigate("/")
   }
 

@@ -1,41 +1,78 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import Navbar from "../Navbar";
+import axiosInstance from "../../api/axios";
 
 function EditProduct() {
-    const [image, setImage] = useState("");
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [quantity, setQuantity] = useState("");
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const formData = new FormData();
-      console.log(image);
-      formData.append("image", image);
-      formData.append("name", name);
-      formData.append("description", description);
-      formData.append("price", price);
-      formData.append("quantity", quantity);
-      console.log("Form submitted with data:", formData);
+  const [image, setImage] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [fetchedProducts, setFetchedProducts] = useState("");
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const response = await axiosInstance.post("/farmer/upload", formData, {
+        const response = await axiosInstance.get(
+          `/farmer/productData?id=${id}`
+        );
+        setFetchedProducts(response.data.findProduct);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if(fetchedProducts){
+      setName(fetchedProducts?.name || '');
+      setDescription(fetchedProducts?.description || '')
+      setQuantity(fetchedProducts?.quantity || '')
+      setPrice(fetchedProducts?.price || '')
+      setImage(fetchedProducts?.image || '')
+    }
+  },[fetchedProducts])
+
+  // console.log(fetchedProducts, "fetched products is here ");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("quantity", quantity);
+
+    try {
+      const response = await axiosInstance.put(
+        `/farmer/editProduct/${id}`,
+        formData,
+        {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        });
-        console.log("file uploaded successfully", response);
-        setImage("");
-        setDescription("");
-        setName("");
-        setPrice("");
-        setQuantity("");
-      } catch (error) {
-        console.log("error in addproduct post ", error);
-      }
-    };
-  
-    return (
+        }
+        );
+      // setImage("");
+      // setDescription("");
+      // setName("");
+      // setPrice("");
+      // setQuantity("");
+    } catch (error) {
+      console.log("error in addproduct put ", error);
+    }
+    console.log(name,description,'name is here')
+  };
+
+  return (
+    <>
+      <div>
+        <Navbar />
+      </div>
       <div className="max-w-md mx-auto">
         <h2 className="text-2xl font-bold mb-4">Edit Product</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -46,8 +83,9 @@ function EditProduct() {
             <input
               type="text"
               id="name"
+              name="name"
+              onChange={(e)=>setName(e.target.value)}
               value={name}
-              onChange={(e) => setName(e.target.value)}
               className="w-full border border-gray-300 rounded-md px-4 py-2"
               required
             />
@@ -58,8 +96,9 @@ function EditProduct() {
             </label>
             <textarea
               id="description"
+              name="description"
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e)=>setDescription(e.target.value)}
               className="w-full border border-gray-300 rounded-md px-4 py-2"
               required
             />
@@ -71,8 +110,9 @@ function EditProduct() {
             <input
               type="text"
               id="quantity"
+              name="quantity"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e)=>setQuantity(e.target.value)}
               className="w-full border border-gray-300 rounded-md px-4 py-2"
               required
             />
@@ -84,8 +124,9 @@ function EditProduct() {
             <input
               type="number"
               id="price"
+              name="price"
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e)=>setPrice(e.target.value)}
               className="w-full border border-gray-300 rounded-md px-4 py-2"
               required
             />
@@ -101,7 +142,10 @@ function EditProduct() {
               setImage(e.target.files[0]);
             }}
           />
-          <img src={image && URL.createObjectURL(image)} alt="" />
+          <img
+            src={image}
+            alt=""
+          />
           <button
             type="submit"
             className="bg-blue-500 mr-5 text-white px-4 py-2 rounded-md hover:bg-blue-600"
@@ -109,10 +153,11 @@ function EditProduct() {
             Done
           </button>
           <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-            <Link to=''>Cancel</Link>
+            <Link to="">Cancel</Link>
           </button>
         </form>
       </div>
-    );
+    </>
+  );
 }
-export default EditProduct
+export default EditProduct;

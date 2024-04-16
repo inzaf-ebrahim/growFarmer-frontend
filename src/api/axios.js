@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use( (config)=> {
     return config;
   }
   (error)=>{
-    return Promise.reject(error)
+    return Promise.reject(error)  
   }
   console.log("Request sent:", config);
 });

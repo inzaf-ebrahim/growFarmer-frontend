@@ -15,7 +15,8 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post("/login", {
+      console.log(password,email,role, 'here is the fields')
+      const response = await axios.post("http://localhost:4000/login", {
         email,
         password,
         role,
@@ -23,6 +24,8 @@ function Login() {
       console.log(response);
       if (response.status == 200) {
         console.log(role, " logged successfully");
+        const jwtToken = response.data.token;
+        localStorage.setItem("jwtToken", jwtToken);
         navigate(`/${role}`, { replace: true });
       } else {
         setError("incorrect email or password");
@@ -30,7 +33,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Error logging in:", error);
-      setError("An error occurred. Please try again later.");
+      // setError("An error occurred. Please try again later.");
     }
   };
   return (

@@ -5,7 +5,7 @@ function FarmerHome() {
   return (
     <div className='bg-lime-100 h-screen'>
         <div><Navbar /></div>
-        <div >Products</div>
+        <div >Farmer home page</div>
     </div>
   )
 }
