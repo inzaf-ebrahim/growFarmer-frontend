@@ -70,7 +70,7 @@ function AddProducts() {
             Quantity:
           </label>
           <input
-            type="text"
+            type="number"
             id="quantity"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}

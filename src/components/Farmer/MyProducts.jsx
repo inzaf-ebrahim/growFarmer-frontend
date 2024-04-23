@@ -25,12 +25,12 @@ function MyProducts() {
       try {
         const response = await axiosInstance.get("/farmer/myproducts");
         setData(response.data.productData);
+        console.log(response.data.productData);
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error here, e.g., set a state variable indicating the error
       }
     };
-
     fetchData();
   }, []);
 

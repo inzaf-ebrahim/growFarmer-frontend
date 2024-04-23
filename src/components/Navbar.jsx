@@ -9,12 +9,16 @@ function Navbar() {
   const toggleButton = () => {
     setDropDown(!dropDown);
   };
-  const Navigate = useNavigate()
-  const logout = ()=>{
-    const loggedUser = localStorage.getItem(`jwtToken`)
+
+  const Navigate = useNavigate();
+  const logout = () => {
+    const loggedUser = localStorage.getItem(`jwtToken`);
     localStorage.removeItem("jwtToken");
-    console.log('logged out');
-Navigate("/")
+    console.log("logged out");
+    Navigate("/");
+  };
+  const showCart = ()=>{
+    Navigate("/cart")
   }
 
   return (
@@ -75,13 +79,18 @@ Navigate("/")
                   </a>
                 </li> */}
 
-                <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={logout}>
+                <li
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  onClick={logout}
+                >
                   Log out
                 </li>
               </ul>
             </div>
           </div>
-          <img className="w-6 h-6 flex justify-end mr-5" src={cart} alt="" />
+          <button onClick={showCart}>
+            <img className="w-6 h-6 flex justify-end mr-5" src={cart} alt="" />
+          </button>
         </div>
       </div>
     </div>
