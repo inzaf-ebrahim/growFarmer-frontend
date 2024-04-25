@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import logo from "../assets/images/logo.png";
-import user from "../assets/images/user.png";
-import cart from "../assets/images/cart.png";
+import logo from "../../assets/images/logo.png";
+import user from "../../assets/images/user.png";
+import cart from "../../assets/images/cart.png";
 import { NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
@@ -23,17 +23,17 @@ function Navbar() {
 
   return (
     <div>
-      <div className="w-full h-14 bg-slate-300 flex justify-between gap-6 ">
+      <div className="w-full h-14 bg-white flex justify-between gap-6 ">
         <div className=" flex gap-6">
           <div className=" flex justify-start ">
             <img className="ml-5 p-1  w-20 h-16" src={logo} alt="" />
           </div>
           <nav className="flex gap-5  items-center justify-center ">
-            <NavLink to="/farmer">HOME</NavLink>
-            <NavLink to="/">LANDS</NavLink>
+            <NavLink to="/">HOME</NavLink>
+            {/* <NavLink to="/">LANDS</NavLink> */}
             <NavLink to="/farmer/products">PRODUCTS</NavLink>
-            <NavLink to="/farmer/sell">SELL</NavLink>
-            <NavLink to="/">ACTIVITY</NavLink>
+            <NavLink to="/">ORDERS</NavLink>
+            {/* <NavLink to="/">DASHBOARD</NavLink> */}
           </nav>
         </div>
         <div className="flex items-center gap-5">

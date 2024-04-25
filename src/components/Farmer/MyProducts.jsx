@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar";
+import FarmerNavbar from "../Farmer/FarmerNavbar";
 import axiosInstance from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,16 +9,16 @@ function MyProducts() {
   const handleEdit = (id) => {
     Navigate(`/farmer/editproducts/${id}`);
   };
-  const handleDelete =async (id)=>{
+  const handleDelete = async (id) => {
     try {
       await axiosInstance.delete(`/farmer/deleteProduct/${id}`);
       // After successful deletion, remove the deleted product from the state
-      setData(data.filter(product => product._id !== id));
+      setData(data.filter((product) => product._id !== id));
     } catch (error) {
       console.error("Error deleting product:", error);
       // Handle error here, e.g., display an error message to the user
     }
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,8 +36,7 @@ function MyProducts() {
 
   return (
     <div>
-      <Navbar />
-      <h1>My Products</h1>
+      <FarmerNavbar />
       <div className="container mx-auto px-14 py-8">
         <h2 className="text-2xl font-semibold mb-4">All Products </h2>
         <div className="flex flex-wrap gap-5 ">
@@ -53,7 +52,7 @@ function MyProducts() {
                 <p className="line-clamp-2">{singleData.description}</p>
                 <div className="flex items-center justify-between mt-2">
                   <span className="text-sm text-gray-500">
-                    {singleData.quantity}
+                    {singleData.quantity}kg
                   </span>
                   <span className="text-sm font-semibold">
                     ₹{singleData.price}
@@ -68,11 +67,11 @@ function MyProducts() {
                   Edit
                 </button>
 
-                <button className="text-white rounded-md bg-green-500 hover:bg-green-900 hover:scale-90 px-3 p-2 my-2 w-full "
+                <button
+                  className="text-white rounded-md bg-green-500 hover:bg-green-900 hover:scale-90 px-3 p-2 my-2 w-full "
                   onClick={() => handleDelete(singleData._id)}
-                  >
+                >
                   Delete
-
                 </button>
               </div>
             </div>

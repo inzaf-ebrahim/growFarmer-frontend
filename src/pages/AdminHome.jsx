@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import FarmerNavbar from '../components/Farmer/FarmerNavbar'
 
 function AdminHome() {
   return (
     <>
-    <div><Navbar/></div>
+    <div><FarmerNavbar/></div>
     <div>AdminHome</div>
     </>
   )

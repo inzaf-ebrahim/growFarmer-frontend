@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import FarmerHome from "../pages/FarmerHome";
-import FarmerSell from "../pages/FarmerSell";
+import FarmerHome from "../pages/Farmer/FarmerHome";
+import FarmerSell from "../pages/Farmer/FarmerSell";
 import FarmerProducts from "../pages/FarmerProducts";
 import MyProducts from "../components/Farmer/MyProducts";
 import EditProduct from "../components/Farmer/EditProduct";
@@ -9,11 +9,11 @@ import EditProduct from "../components/Farmer/EditProduct";
 function FarmerRouter() {
   return (
     <Routes>
-      <Route path="/" element={<FarmerHome/>}></Route>
-      <Route path="/products" element={<FarmerProducts/>}></Route>
-      <Route path="/sell" element={<FarmerSell/>}></Route>
-      <Route path="/myproducts" element={<MyProducts/>}></Route>
-      <Route path="/editproducts/:id" element={<EditProduct/>}></Route>
+      <Route path="/" element={<FarmerHome />}></Route>
+      <Route path="/products" element={<FarmerProducts />}></Route>
+      <Route path="/sell" element={<FarmerSell />}></Route>
+      <Route path="/myproducts" element={<MyProducts />}></Route>
+      <Route path="/editproducts/:id" element={<EditProduct />}></Route>
     </Routes>
   );
 }

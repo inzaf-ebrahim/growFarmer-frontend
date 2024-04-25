@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Navbar from "../Navbar";
+import Navbar from "../User/Navbar";
 import axiosInstance from "../../api/axios";
 
 function EditProduct() {
@@ -27,14 +27,14 @@ function EditProduct() {
   }, []);
 
   useEffect(() => {
-    if(fetchedProducts){
-      setName(fetchedProducts?.name || '');
-      setDescription(fetchedProducts?.description || '')
-      setQuantity(fetchedProducts?.quantity || '')
-      setPrice(fetchedProducts?.price || '')
-      setImage(fetchedProducts?.image || '')
+    if (fetchedProducts) {
+      setName(fetchedProducts?.name || "");
+      setDescription(fetchedProducts?.description || "");
+      setQuantity(fetchedProducts?.quantity || "");
+      setPrice(fetchedProducts?.price || "");
+      setImage(fetchedProducts?.image || "");
     }
-  },[fetchedProducts])
+  }, [fetchedProducts]);
 
   // console.log(fetchedProducts, "fetched products is here ");
 
@@ -56,7 +56,7 @@ function EditProduct() {
             "Content-Type": "multipart/form-data",
           },
         }
-        );
+      );
       // setImage("");
       // setDescription("");
       // setName("");
@@ -65,7 +65,7 @@ function EditProduct() {
     } catch (error) {
       console.log("error in addproduct put ", error);
     }
-    console.log(name,description,'name is here')
+    console.log(name, description, "name is here");
   };
 
   return (
@@ -84,7 +84,7 @@ function EditProduct() {
               type="text"
               id="name"
               name="name"
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               value={name}
               className="w-full border border-gray-300 rounded-md px-4 py-2"
               required
@@ -98,7 +98,7 @@ function EditProduct() {
               id="description"
               name="description"
               value={description}
-              onChange={(e)=>setDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
               className="w-full border border-gray-300 rounded-md px-4 py-2"
               required
             />
@@ -108,11 +108,11 @@ function EditProduct() {
               Quantity:
             </label>
             <input
-              type="text"
+              type="number"
               id="quantity"
               name="quantity"
               value={quantity}
-              onChange={(e)=>setQuantity(e.target.value)}
+              onChange={(e) => setQuantity(e.target.value)}
               className="w-full border border-gray-300 rounded-md px-4 py-2"
               required
             />
@@ -126,7 +126,7 @@ function EditProduct() {
               id="price"
               name="price"
               value={price}
-              onChange={(e)=>setPrice(e.target.value)}
+              onChange={(e) => setPrice(e.target.value)}
               className="w-full border border-gray-300 rounded-md px-4 py-2"
               required
             />
@@ -142,10 +142,7 @@ function EditProduct() {
               setImage(e.target.files[0]);
             }}
           />
-          <img
-            src={image}
-            alt=""
-          />
+          <img src={image} alt="" />
           <button
             type="submit"
             className="bg-blue-500 mr-5 text-white px-4 py-2 rounded-md hover:bg-blue-600"
