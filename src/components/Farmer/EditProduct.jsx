@@ -70,9 +70,6 @@ function EditProduct() {
 
   return (
     <>
-      <div>
-        <FarmerNavbar />
-      </div>
       <div className="max-w-md mx-auto">
         <h2 className="text-2xl font-bold mb-4">Edit Product</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

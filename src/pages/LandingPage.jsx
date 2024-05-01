@@ -9,9 +9,8 @@ import Login from "./Login";
 function LandingPage() {
   return (
     <div>
-      <Navbar />
       <div
-        className="w-screen h-[633px] bg-cover "
+        className="w-screen h-screen bg-cover "
         style={{ backgroundImage: `url(${bg})` }}
       >
         <h1 className="text-white text-7xl pl-6 pt-56 font-serif ">
@@ -35,12 +34,12 @@ function LandingPage() {
           <img className="w-6 h-6 " src={arrow} alt="" />
         </div>
       </div>
-      <div>
+      {/* <div>
         <Signup />
       </div>
       <div>
         <Login />
-      </div>
+      </div> */}
     </div>
   );
 }

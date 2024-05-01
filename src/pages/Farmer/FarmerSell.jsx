@@ -5,9 +5,7 @@ import FarmerNavbar from "../../components/Farmer/FarmerNavbar"
 function FarmerSell() {
   return (
     <>
-      <div>
-        <FarmerNavbar />
-      </div>
+     
       <div>
         <AddProducts />
       </div>

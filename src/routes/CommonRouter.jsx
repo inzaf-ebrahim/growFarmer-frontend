@@ -11,10 +11,7 @@ function CommonRouter() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/signup" element={<Signup />}></Route>
-      <Route path="/forget" element={<ForgetPassword />}></Route>
-      <Route path="/cart" element={<Cart />}></Route>
+      {/* <Route path="/forget" element={<ForgetPassword />}></Route> */}
     </Routes>
   );
 }

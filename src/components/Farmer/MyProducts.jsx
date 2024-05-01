@@ -36,7 +36,6 @@ function MyProducts() {
 
   return (
     <div>
-      <FarmerNavbar />
       <div className="container mx-auto px-14 py-8">
         <h2 className="text-2xl font-semibold mb-4">All Products </h2>
         <div className="flex flex-wrap gap-5 ">

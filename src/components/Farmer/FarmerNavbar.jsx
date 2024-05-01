@@ -15,7 +15,7 @@ function Navbar() {
     const loggedUser = localStorage.getItem(`jwtToken`);
     localStorage.removeItem("jwtToken");
     console.log("logged out");
-    Navigate("/");
+    Navigate("/signup");
   };
   const showCart = ()=>{
     Navigate("/cart")
@@ -23,7 +23,7 @@ function Navbar() {
 
   return (
     <div>
-      <div className="w-full h-14 bg-white flex justify-between gap-6 ">
+      <div className="w-full h-14 bg-slate-100 flex justify-between gap-6 ">
         <div className=" flex gap-6">
           <div className=" flex justify-start ">
             <img className="ml-5 p-1  w-20 h-16" src={logo} alt="" />

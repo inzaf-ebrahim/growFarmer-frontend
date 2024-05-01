@@ -15,10 +15,10 @@ function Navbar() {
     const loggedUser = localStorage.getItem(`jwtToken`);
     localStorage.removeItem("jwtToken");
     console.log("logged out");
-    Navigate("/");
+    Navigate("/signup");
   };
   const showCart = ()=>{
-    Navigate("/cart")
+    Navigate("/user/cart")
   }
 
   return (
@@ -29,10 +29,10 @@ function Navbar() {
             <img className="ml-5 p-1  w-20 h-16" src={logo} alt="" />
           </div>
           <nav className="flex gap-5  items-center justify-center ">
-            <NavLink to="/">HOME</NavLink>
+            <NavLink to="/user">HOME</NavLink>
             {/* <NavLink to="/">LANDS</NavLink> */}
-            <NavLink to="/farmer/products">PRODUCTS</NavLink>
-            <NavLink to="/">ORDERS</NavLink>
+            <NavLink to="/user/products">PRODUCTS</NavLink>
+            <NavLink to="/user">ORDERS</NavLink>
             {/* <NavLink to="/">DASHBOARD</NavLink> */}
           </nav>
         </div>

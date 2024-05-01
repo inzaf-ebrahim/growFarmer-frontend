@@ -68,7 +68,7 @@ function Address() {
             amount: totalAmount,
           });
           console.log(res, "res");
-          navigate("/cart");
+          navigate("/user/cart");
         },
         prefill: {
           name: "Piyush Garg",
