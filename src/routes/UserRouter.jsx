@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Address from "../components/User/Address";
 import ShowProducts from "../components/ShowProducts";
 import LandingPage from "../pages/LandingPage";
-import Cart from "../components/cart";
+import Cart from "../components/Cart";
 
 function UserRouter() {
   return (
