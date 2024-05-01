@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./User/Navbar";
 import axiosInstance from "../api/axios";
-import useRazorpay from "react-razorpay";
+import { useNavigate } from "react-router-dom";
+// import useRazorpay from "react-razorpay";
 
 function Cart() {
   const [products, setProducts] = useState([]);
-  const [Razorpay] = useRazorpay();
+  const navigate =useNavigate()
 
-  const razorpayKeyId = import.meta.env.VITE_RAZORPAY_KEY_ID;
+  // const [Razorpay] = useRazorpay();
+
+  // const razorpayKeyId = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
   const handleRemove = async (id) => {
     try {
@@ -40,81 +43,84 @@ function Cart() {
   useEffect(() => {
     fetchData(); // Fetch data on component mount
   }, []);
+  const handleAddress = async(productId) =>{
+    navigate(`/user/address/${productId}`)
+  }
 
-  const handleBuyNow = async (productId) => {
-    try {
-      const productResponse = await axiosInstance.get(
-        `/ProductDetails/${productId}`
-      );
-      const product = productResponse.data;
-      const totalAmount = product.ProductDetails.price * 100; // Assuming price is in whole numbers, convert to paise
+  // const handleBuyNow = async (productId) => {
+  //   try {
+  //     const productResponse = await axiosInstance.get(
+  //       `/ProductDetails/${productId}`
+  //     );
+  //     const product = productResponse.data;
+  //     const totalAmount = product.ProductDetails.price * 100; // Assuming price is in whole numbers, convert to paise
 
-      const orderData = {
-        amount: totalAmount,
-        currency: "INR",
-        receipt: `receipt_${Math.random().toString(36).substring(2, 15)}`,
-        payment_capture: 0, // Set to 0 for test mode (change to 1 for live)
-      };
-      console.log(orderData);
-      const createOrderResponse = await axiosInstance.post(
-        "/razorpayorder",
-        orderData
-      );
-      const razorpayOrderId = createOrderResponse.data.order.id;
-      console.log(razorpayOrderId, "order id");
+  //     const orderData = {
+  //       amount: totalAmount,
+  //       currency: "INR",
+  //       receipt: `receipt_${Math.random().toString(36).substring(2, 15)}`,
+  //       payment_capture: 0, // Set to 0 for test mode (change to 1 for live)
+  //     };
+  //     console.log(orderData);
+  //     const createOrderResponse = await axiosInstance.post(
+  //       "/razorpayorder",
+  //       orderData
+  //     );
+  //     const razorpayOrderId = createOrderResponse.data.order.id;
+  //     console.log(razorpayOrderId, "order id");
 
-      const options = {
-        key: razorpayKeyId,
-        amount: totalAmount,
-        currency: "INR",
-        name: `Product: ${product.ProductDetails.name}`,
-        description: "Your Company Name",
-        // image: ` ${product.ProductDetails.image}`, // Replace with your logo URL
-        order_id: razorpayOrderId,
-        handler: async (response) => {
-          const razorpayPaymentId = response.razorpay_payment_id;
-          const razorpaySignature = response.razorpay_signature;
+  //     const options = {
+  //       key: razorpayKeyId,
+  //       amount: totalAmount,
+  //       currency: "INR",
+  //       name: `Product: ${product.ProductDetails.name}`,
+  //       description: "Your Company Name",
+  //       // image: ` ${product.ProductDetails.image}`, // Replace with your logo URL
+  //       order_id: razorpayOrderId,
+  //       handler: async (response) => {
+  //         const razorpayPaymentId = response.razorpay_payment_id;
+  //         const razorpaySignature = response.razorpay_signature;
 
-          // 4. Send Payment Verification Request to Server
-          const verificationResponse = await axiosInstance.post(
-            "/verify-payment",
-            {
-              orderId: razorpayPaymentId,
-              signature: razorpaySignature,
-            }
-          );
+  //         // 4. Send Payment Verification Request to Server
+  //         const verificationResponse = await axiosInstance.post(
+  //           "/verify-payment",
+  //           {
+  //             orderId: razorpayPaymentId,
+  //             signature: razorpaySignature,
+  //           }
+  //         );
 
-          const verificationData = verificationResponse.data;
+  //         const verificationData = verificationResponse.data;
 
-          if (verificationData.success) {
-            console.log("Payment successful!");
-            // Handle successful payment logic (e.g., order confirmation, update order status)
-            alert("Payment Successful!"); // Temporary success alert
-          } else {
-            console.error("Payment verification failed!");
-            // Handle failed verification logic (e.g., display error message)
-            alert("Payment Verification Failed!"); // Temporary error alert
-          }
-        },
-      };
+  //         if (verificationData.success) {
+  //           console.log("Payment successful!");
+  //           // Handle successful payment logic (e.g., order confirmation, update order status)
+  //           alert("Payment Successful!"); // Temporary success alert
+  //         } else {
+  //           console.error("Payment verification failed!");
+  //           // Handle failed verification logic (e.g., display error message)
+  //           alert("Payment Verification Failed!"); // Temporary error alert
+  //         }
+  //       },
+  //     };
 
-      const razorpay = new Razorpay(options);
+  //     const razorpay = new Razorpay(options);
 
-      razorpay.on("payment.failed", function (response) {
-        alert(response.error.code);
-        alert(response.error.description);
-        alert(response.error.source);
-        alert(response.error.step);
-        alert(response.error.reason);
-        alert(response.error.metadata.order_id);
-        alert(response.error.metadata.payment_id);
-      });
+  //     razorpay.on("payment.failed", function (response) {
+  //       alert(response.error.code);
+  //       alert(response.error.description);
+  //       alert(response.error.source);
+  //       alert(response.error.step);
+  //       alert(response.error.reason);
+  //       alert(response.error.metadata.order_id);
+  //       alert(response.error.metadata.payment_id);
+  //     });
 
-      razorpay.open();
-    } catch (error) {
-      console.log("Error in buy:", error);
-    }
-  };
+  //     razorpay.open();
+  //   } catch (error) {
+  //     console.log("Error in buy:", error);
+  //   }
+  // };
 
   return (
     <div className="bg-gray-100">
@@ -153,7 +159,8 @@ function Cart() {
                 <div className="flex justify-center mt-4 gap-2">
                   <button
                     className="px-3 py-2 rounded-md bg-green-500 hover:bg-green-700 text-white font-bold"
-                    onClick={() => handleBuyNow(product.ProductDetails._id)}
+                    // onClick={() => handleBuyNow(product.ProductDetails._id)}
+                    onClick={()=>handleAddress(product.ProductDetails._id)}
                   >
                     Buy Now
                   </button>

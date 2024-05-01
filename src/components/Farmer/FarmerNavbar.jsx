@@ -88,9 +88,9 @@ function Navbar() {
               </ul>
             </div>
           </div>
-          <button onClick={showCart}>
+          {/* <button onClick={showCart}>
             <img className="w-6 h-6 flex justify-end mr-5" src={cart} alt="" />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Navbar from "../User/Navbar";
+import FarmerNavbar from "../Farmer/FarmerNavbar";
 import axiosInstance from "../../api/axios";
 
 function EditProduct() {
@@ -65,13 +65,13 @@ function EditProduct() {
     } catch (error) {
       console.log("error in addproduct put ", error);
     }
-    console.log(name, description, "name is here");
+    console.log(name, description,image ,"name is here");
   };
 
   return (
     <>
       <div>
-        <Navbar />
+        <FarmerNavbar />
       </div>
       <div className="max-w-md mx-auto">
         <h2 className="text-2xl font-bold mb-4">Edit Product</h2>
@@ -142,7 +142,10 @@ function EditProduct() {
               setImage(e.target.files[0]);
             }}
           />
-          <img src={image} alt="" />
+{image && image instanceof File && (
+  <img src={URL.createObjectURL(image)} alt="" />
+)}
+
           <button
             type="submit"
             className="bg-blue-500 mr-5 text-white px-4 py-2 rounded-md hover:bg-blue-600"
@@ -150,7 +153,7 @@ function EditProduct() {
             Done
           </button>
           <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-            <Link to="">Cancel</Link>
+            <Link to="/farmer/myproducts">Cancel</Link>
           </button>
         </form>
       </div>
