@@ -18,9 +18,6 @@ function Chat() {
       <div className=" w-16 h-16 flex justify-center items-center cursor-pointer " onClick={handleModal}>
         <img className="w-10 h-10" src={icon} alt="" />
       </div>
-
-      
-      
     </div>
   );
 }
